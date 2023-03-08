@@ -19,7 +19,7 @@ import java.util.List;
 @Getter
 @Builder
 public class OrderEntity {
-    private Long oderID;
+    private Long orderID;
     private Float amount;
     private String orderDate;
     private Long customerID;

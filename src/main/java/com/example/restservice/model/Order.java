@@ -19,7 +19,7 @@ import java.util.List;
 @ToString
 @Builder
 public class Order {
-    private Long OrderID;
+    private Long orderID;
     private Float amount;
     private String orderDate;
     private Long customerID;

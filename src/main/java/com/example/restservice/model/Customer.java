@@ -1,6 +1,9 @@
 package com.example.restservice.model;
 
+import com.example.restservice.repository.entity.OrderEntity;
 import lombok.*;
+
+import java.util.List;
 
 /**
  * @Author: Yeming Hu
@@ -21,4 +24,5 @@ public class Customer {
     private String carMake;
     private String carModel;
     private String carPlateNo;
+    private List<OrderEntity> orders;
 }

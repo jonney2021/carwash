@@ -20,5 +20,5 @@ public class ProductEntity {
     private Long productID;
     private Float productPrice;
     private String productType;
-//    private List<OrderEntity> orders;
+    private List<OrderEntity> orders;
 }

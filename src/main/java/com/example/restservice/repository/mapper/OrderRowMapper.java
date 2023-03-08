@@ -19,7 +19,7 @@ public class OrderRowMapper implements RowMapper<OrderEntity> {
     public OrderEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
 
         return OrderEntity.builder()
-                .oderID(rs.getLong("order_id"))
+                .orderID(rs.getLong("order_id"))
                 .amount(rs.getFloat("amount"))
 //                .orderDate(rs.getTimestamp("order_date").toLocalDateTime())
                 .orderDate(rs.getTimestamp("order_date").toString())
