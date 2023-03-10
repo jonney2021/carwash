@@ -11,15 +11,37 @@ import java.util.List;
  * @Version: 1.0
  */
 public interface OrderService {
+    /**
+     *
+     * @return the list of orders
+     */
     List<Order> getAllOrders();
 
+    /**
+     *
+     * @param orderID  the id of the order
+     * @return
+     */
     Order getOrderByID(Long orderID);
 
+    /**
+     *
+     * @param order
+     * @return the number of the order
+     */
     Long addOrder(Order order);
 
+    /**
+     *
+     * @param orderID the id of the order
+     * @param order  an order with that id
+     */
     void editOrder(Long orderID,Order order);
 
+    /**
+     *
+     * @param orderID the id of that order
+     */
     void deleteOrder(Long orderID);
-
 
 }

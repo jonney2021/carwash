@@ -21,7 +21,7 @@ import java.util.List;
 public class OrderEntity {
     private Long orderID;
     private Float amount;
-    private String orderDate;
+    private LocalDateTime orderDate;
     private Long customerID;
     private Long productID;
 }

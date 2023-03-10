@@ -22,7 +22,7 @@ public class OrderRowMapper implements RowMapper<OrderEntity> {
                 .orderID(rs.getLong("order_id"))
                 .amount(rs.getFloat("amount"))
 //                .orderDate(rs.getTimestamp("order_date").toLocalDateTime())
-                .orderDate(rs.getTimestamp("order_date").toString())
+                .orderDate(rs.getTimestamp("order_date").toLocalDateTime())
                 .customerID(rs.getLong("customer_id"))
                 .productID(rs.getLong("product_id"))
                 .build();
