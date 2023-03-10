@@ -19,6 +19,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/carwash")
+@CrossOrigin(maxAge = 45000)
 public class CustomerController {
     @Autowired
     private CustomerService customerService;

@@ -68,10 +68,11 @@ public class CustomerRepository {
         jdbcTemplate.update(sql, customer.getCustomerName(), customer.getCustomerPhone(), customer.getCarMake(), customer.getCarModel(), customer.getCarPlateNo());
         Long customerID = jdbcTemplate.queryForObject("SELECT MAX(customer_id) FROM CUSTOMER", Long.class);
 
-        for(Order order : customer.getOrders()){
-            sql = "INSERT INTO `order`(amount,order_date,customer_id,product_id) VALUES(?,CURRENT_TIMESTAMP,?,?)";
-            jdbcTemplate.update(sql,order.getAmount(),customerID,order.getProductID());
-
+        if(customer.getOrders() != null){
+            for(Order order : customer.getOrders()){
+                sql = "INSERT INTO `order`(amount,order_date,customer_id,product_id) VALUES(?,CURRENT_TIMESTAMP,?,?)";
+                jdbcTemplate.update(sql,order.getAmount(),customerID,order.getProductID());
+            }
         }
         return customerID;
     }
