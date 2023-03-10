@@ -1,4 +1,4 @@
-package com.example.restservice.repository;
+package com.example.restservice.repository.mapper;
 
 import com.example.restservice.repository.entity.ProductEntity;
 import com.example.restservice.repository.mapper.ProductResultSetExtractor;

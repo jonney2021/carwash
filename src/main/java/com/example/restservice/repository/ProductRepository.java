@@ -3,6 +3,7 @@ package com.example.restservice.repository;
 import com.example.restservice.model.Order;
 import com.example.restservice.model.Product;
 import com.example.restservice.repository.entity.ProductEntity;
+import com.example.restservice.repository.mapper.ProductOrderRowMapper;
 import com.example.restservice.repository.mapper.ProductRowMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
