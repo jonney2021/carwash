@@ -1,7 +1,10 @@
 package com.example.restservice.repository;
 
 import com.example.restservice.model.Customer;
+import com.example.restservice.model.Order;
 import com.example.restservice.repository.entity.CustomerEntity;
+import com.example.restservice.repository.entity.OrderEntity;
+import com.example.restservice.repository.mapper.CustomerOrderRowMapper;
 import com.example.restservice.repository.mapper.CustomerRowMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +41,9 @@ public class CustomerRepository {
     }
 
     public Customer getCustomerByID(Long customerID) {
-        String sql = "SELECT * FROM CUSTOMER WHERE customer_id=?";
+        String sql = "SELECT * FROM CUSTOMER C LEFT JOIN `ORDER` O ON C.customer_id = O.customer_id WHERE C.customer_id=?";
         try {
-            CustomerEntity customerEntity = jdbcTemplate.queryForObject(sql, new CustomerRowMapper(), customerID);
+            CustomerEntity customerEntity = jdbcTemplate.queryForObject(sql, new CustomerOrderRowMapper(), customerID);
             Customer customer = modelMapper.map(customerEntity, Customer.class);
             return customer;
         } catch (EmptyResultDataAccessException exception) {
@@ -49,9 +52,9 @@ public class CustomerRepository {
     }
 
     public Customer getCustomerByName(String customerName) {
-        String sql = "SELECT * FROM CUSTOMER where customer_name=?";
+        String sql = "SELECT * FROM CUSTOMER C LEFT JOIN `ORDER` O ON C.customer_id = O.customer_id WHERE C.customer_name=?";
         try {
-            CustomerEntity customerEntity = jdbcTemplate.queryForObject(sql, new CustomerRowMapper(), customerName);
+            CustomerEntity customerEntity = jdbcTemplate.queryForObject(sql, new CustomerOrderRowMapper(), customerName);
             return modelMapper.map(customerEntity, Customer.class);
         } catch (EmptyResultDataAccessException ex) {
             return null;
@@ -64,6 +67,12 @@ public class CustomerRepository {
         sql = "INSERT INTO CUSTOMER(customer_name,customer_phone,car_make,car_model,car_plate_no) VALUES(?,?,?,?,?)";
         jdbcTemplate.update(sql, customer.getCustomerName(), customer.getCustomerPhone(), customer.getCarMake(), customer.getCarModel(), customer.getCarPlateNo());
         Long customerID = jdbcTemplate.queryForObject("SELECT MAX(customer_id) FROM CUSTOMER", Long.class);
+
+        for(Order order : customer.getOrders()){
+            sql = "INSERT INTO `order`(amount,order_date,customer_id,product_id) VALUES(?,CURRENT_TIMESTAMP,?,?)";
+            jdbcTemplate.update(sql,order.getAmount(),customerID,order.getProductID());
+
+        }
         return customerID;
     }
 

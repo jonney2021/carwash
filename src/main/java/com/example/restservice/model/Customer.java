@@ -24,5 +24,5 @@ public class Customer {
     private String carMake;
     private String carModel;
     private String carPlateNo;
-    private List<OrderEntity> orders;
+    private List<Order> orders;
 }
