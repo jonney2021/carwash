@@ -50,6 +50,17 @@ public class ProductRepository {
         }
     }
 
+    public Product getProductByType(String productType){
+        String sql="SELECT * FROM PRODUCT P LEFT JOIN `ORDER` O ON P.product_id=O.product_id WHERE P.product_type=?";
+        try{
+            ProductEntity productEntity = jdbcTemplate.queryForObject(sql,new ProductOrderRowMapper(),productType);
+            Product product = modelMapper.map(productEntity, Product.class);
+            return product;
+        }catch(EmptyResultDataAccessException ex){
+            return null;
+        }
+    }
+
 
     public Long addProduct(Product product){
         String sql="";

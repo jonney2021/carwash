@@ -38,6 +38,15 @@ public class ProductController {
         }
     }
 
+    @GetMapping("/products/product")
+    public ResponseEntity<Product> getProductByType(@RequestParam(value = "name", defaultValue = "") String productType){
+        try{
+            return new ResponseEntity<>(productService.getProductByType(productType),HttpStatus.OK);
+        }catch(ProductNotFoundException ex){
+            return new ResponseEntity(ex.getMessage(),HttpStatus.NOT_FOUND);
+        }
+    }
+
     // add product
     @PostMapping("/products")
     public ResponseEntity<Long> addProduct(@RequestBody Product product){

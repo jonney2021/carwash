@@ -26,6 +26,13 @@ public interface ProductService {
 
     /**
      *
+     * @param productType the type of the product
+     * @return
+     */
+    Product getProductByType(String productType);
+
+    /**
+     *
      * @param product
      * @return the number of the product
      */

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import static com.example.restservice.constants.ErrorMessages.NO_PRODUCT_FOUND_ID;
+import static com.example.restservice.constants.ErrorMessages.NO_PRODUCT_FOUND_TYPE;
 
 /**
  * @Author: Yeming Hu
@@ -31,6 +32,15 @@ public class ProductServiceImpl implements ProductService{
         Product productFound = productRepository.getProductByID(productID);
         if(productFound == null){
             throw new ProductNotFoundException(String.format(NO_PRODUCT_FOUND_ID,productID));
+        }
+        return productFound;
+    }
+
+    @Override
+    public Product getProductByType(String productType) {
+        Product productFound = productRepository.getProductByType(productType);
+        if(productFound == null){
+            throw new ProductNotFoundException(String.format(NO_PRODUCT_FOUND_TYPE,productType));
         }
         return productFound;
     }
