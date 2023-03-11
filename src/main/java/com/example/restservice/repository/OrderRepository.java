@@ -28,7 +28,7 @@ public class OrderRepository {
     ModelMapper modelMapper;
 
     public List<Order> getAllOrders() {
-        List<OrderEntity> orderEntities = jdbcTemplate.query("SELECT * FROM `ORDER`", new OrderRowMapper());
+        List<OrderEntity> orderEntities = jdbcTemplate.query("SELECT * FROM `ORDER` O inner join product p on O.product_id = p.product_id;", new OrderRowMapper());
         List<Order> orderResult = new ArrayList<>();
         for (OrderEntity orderEntity : orderEntities) {
             Order order = modelMapper.map(orderEntity, Order.class);
