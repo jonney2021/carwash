@@ -4,6 +4,7 @@ import com.example.restservice.model.Order;
 import com.example.restservice.model.Product;
 import com.example.restservice.repository.entity.ProductEntity;
 import com.example.restservice.repository.mapper.ProductOrderRowMapper;
+import com.example.restservice.repository.mapper.ProductRowMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -28,7 +29,8 @@ public class ProductRepository {
     ModelMapper modelMapper;
 
     public List<Product> getAllProduct(){
-        List<ProductEntity> productEntities = jdbcTemplate.query("SELECT * FROM PRODUCT P  LEFT JOIN `ORDER` O ON P.product_id=O.product_id", new ProductOrderRowMapper());
+
+        List<ProductEntity> productEntities = jdbcTemplate.query("SELECT * FROM PRODUCT", new ProductRowMapper());
         List<Product> productResult = new ArrayList<>();
         for(ProductEntity productEntity: productEntities){
             Product product = modelMapper.map(productEntity,Product.class);
