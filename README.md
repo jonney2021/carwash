@@ -1,3 +1,3 @@
 # carwash
 
-This a rest api project.
+This is a rest api project.
